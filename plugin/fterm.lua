@@ -5,6 +5,7 @@ local fterm = {
 
 vim.api.nvim_set_hl(0, "FTerm", { link = "Normal" })
 vim.api.nvim_set_hl(0, "FTermBorder", { fg = "#83a598" })
+vim.api.nvim_set_hl(0, "FTermTitle", { link = "Normal" })
 
 function fterm:create_win()
     local width = math.floor(vim.o.columns * 0.6)
@@ -16,7 +17,9 @@ function fterm:create_win()
         col = (vim.o.columns - width) / 2,
         row = (vim.o.lines - height) / 2,
         style = "minimal",
-        border = "rounded" -- none | single | double | rounded | solid | shadow
+        border = "rounded", -- none | single | double | rounded | solid | shadow
+        title = {{ "Terminal", "FTermTitle" }},
+        title_pos = "center",
     })
     vim.api.nvim_set_option_value("winhl", "Normal:FTerm,FloatBorder:FTermBorder", { win = self.win })
 end

@@ -30,10 +30,27 @@
         "type": "indirect"
       }
     },
+    "plugins-evergarden": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745594024,
+        "narHash": "sha256-CiRiZRmD7tuy/fNQwYJohiS1KSL+7ihTm29cMHunUWE=",
+        "owner": "everviolet",
+        "repo": "nvim",
+        "rev": "de538e9aac1358872c118e0d7bc45462fc8205c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "everviolet",
+        "repo": "nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "plugins-evergarden": "plugins-evergarden"
       }
     }
   },

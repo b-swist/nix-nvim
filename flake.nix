@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
+    plugins-evergarden = {
+      url = "github:everviolet/nvim";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -15,35 +19,49 @@
       inherit system;
     };
 
-    packageName = "nvim";
+    defaultPackageName = "nvim";
+    defaultCategoryName = "default";
+    luaPath = ./.;
 
-    categoryDefinitions = { pkgs, settings, categories, extra, name, mkPlugin, ... }@packageDef: {
-      lspsAndRuntimeDeps.default = with pkgs; [
+    dependencyOverlays = [
+      (utils.sanitizedPluginOverlay inputs)
+    ];
+
+    categoryDefinitions = { pkgs, settings, categories, extra, name, ... }@packageDef: {
+      lspsAndRuntimeDeps.${defaultCategoryName} = with pkgs; [
         lua-language-server
         haskell-language-server
         nixd
       ];
 
-      startupPlugins.default = with pkgs.vimPlugins; [
-        nvim-lspconfig
-        nvim-treesitter.withAllGrammars
-        nvim-autopairs
-      ];
+      startupPlugins.${defaultCategoryName} = with pkgs; (
+        (with vimPlugins; [
+          nvim-lspconfig
+          nvim-treesitter.withAllGrammars
 
-      optionalPlugins.default = with pkgs.vimPlugins; [
+          nvim-autopairs
+        ]) ++ (with neovimPlugins; [
+          evergarden
+        ])
+      );
+
+      optionalPlugins.${defaultCategoryName} = with pkgs.vimPlugins; [
         vimtex
       ];
     };
 
-    packageDefinitions.${packageName} = { pkgs, name, mkPlugin, ... }: {
+    packageDefinitions.${defaultPackageName} = { pkgs, name, ... }: {
       # settings = {
       #   suffix-path = true;
       #   suffix-LD = true;
       # };
-      categories.default = true;
+      categories.${defaultCategoryName} = true;
       # extra = {};
     };
-  in {
-    packages.${system} = utils.mkAllWithDefault (utils.baseBuilder ./. { inherit pkgs; } categoryDefinitions packageDefinitions packageName);
-  };
+  in
+    let
+      nixCatsBuilder = utils.baseBuilder luaPath { inherit dependencyOverlays pkgs; } categoryDefinitions packageDefinitions;
+    in {
+      packages.${system} = utils.mkAllWithDefault (nixCatsBuilder defaultPackageName);
+    };
 }

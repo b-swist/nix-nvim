@@ -20,11 +20,12 @@ setmetatable(opts, {
 })
 
 vim.keymap.set("n", "<leader>r", "<cmd>luafile %<CR>", opts)
-vim.keymap.set("v", "<leader>r", "<cmd>'<,'>lua<CR>", opts)
+vim.keymap.set("v", "<leader>r", ":lua<CR>", opts)
 
 -- motions
 vim.keymap.set({ "n", "v" }, "j", "gj", opts)
 vim.keymap.set({ "n", "v" }, "k", "gk", opts)
+
 vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
 vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
@@ -32,6 +33,8 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
+vim.keymap.set("v", "J", ":m '>+1<CR>gv", opts)
+vim.keymap.set("v", "K", ":m '<-2<CR>gv", opts)
 
 -- tabs
 vim.keymap.set("n", "<leader>dt", "<cmd>tabclose<CR>", opts .. { desc = "[D]elete [T]ab" })

@@ -4,4 +4,4 @@ require("autocmds")
 require("lsp")
 require("plugins")
 
-vim.cmd.colorscheme("retrobox")
+vim.cmd.colorscheme("evergarden")
