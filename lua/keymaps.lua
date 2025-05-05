@@ -69,6 +69,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
+-- netrw
+vim.keymap.set("n", "<leader>f", "<cmd>Lexplore<CR>", opts .. { desc = "Open [F]ile Tree" })
+
 -- fterm
 vim.keymap.set("n", "<leader>t", "<cmd>FTerm<CR>", opts .. { desc = "[T]erminal Toggle" })
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", opts)

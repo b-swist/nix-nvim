@@ -33,8 +33,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
-        if client:supports_method('textDocument/completion') then
-            vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+        if client:supports_method("textDocument/completion") then
+            vim.lsp.completion.enable(true, client.id, event.buf)
         end
 
         if client:supports_method("textDocument/documentHighlight", event.buf) then
@@ -43,15 +43,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 group = group.hl,
                 callback = vim.lsp.buf.document_highlight
             })
-            vim.api.nvim_create_autocmd("CursorMoved", {
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
                 buffer = event.buf,
                 group = group.hl,
                 callback = vim.lsp.buf.clear_references
             })
         end
 
-        if client:supports_method('textDocument/formatting') then
-            vim.api.nvim_create_autocmd('BufWritePre', {
+        if client:supports_method("textDocument/formatting") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
                 group = group.format,
                 buffer = event.buf,
                 callback = function()

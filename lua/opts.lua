@@ -8,7 +8,7 @@ vim.opt.splitright = true
 vim.opt.scrolloff = 6
 
 vim.opt.updatetime = 500
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 650
 
 vim.opt.number = true
 vim.opt.list = true
@@ -41,6 +41,19 @@ vim.opt.inccommand = "split"
 
 vim.opt.background = "dark"
 vim.opt.termguicolors = true
+
+-- netrw
+vim.g.netrw_winsize = 25
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_keepdir = 0
+
+vim.g.altv = true
+vim.g.alto = true
+vim.g.netrw_browse_split = 3
+
+vim.g.netrw_localcopydircmd = "cp -r"
+vim.g.netrw_localrmdir = "rm -r"
 
 -- filetype opts
 local ft_group = vim.api.nvim_create_augroup("filetype-opts", { clear = true })
