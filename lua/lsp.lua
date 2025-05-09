@@ -1,43 +1,43 @@
-local servers = {
-    nixd = {},
-    hls = {},
-    lua_ls = {
-        settings = {
-            Lua = {
-                -- diagnostics = {
-                --     globals = { "vim" }
-                -- },
-                workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true)
-                }
+vim.lsp.config("lua_ls", {
+    settings = {
+        Lua = {
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true)
             }
         }
     }
-}
+})
 
-for server, settings in pairs(servers) do
-    require("lspconfig")[server].setup(settings)
-end
+vim.lsp.enable({ "nixd", "hls", "lua_ls" })
 
 local group = {
     attach = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
     detach = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
-    format = vim.api.nvim_create_augroup("lsp-format", { clear = false }),
     hl = vim.api.nvim_create_augroup("lsp-highlight-hover", { clear = false }),
 }
+
+vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = group.attach,
     callback = function(event)
-        vim.diagnostic.config({ virtual_text = true })
-
         local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
+        vim.diagnostic.config({
+            -- virtual_text = true,
+            virtual_lines = true,
+            severity_sort = true,
+            signs = false,
+            float = {
+                border = "rounded"
+            }
+        })
+
         if client:supports_method("textDocument/completion") then
-            vim.lsp.completion.enable(true, client.id, event.buf)
+            vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = false })
         end
 
-        if client:supports_method("textDocument/documentHighlight", event.buf) then
+        if client:supports_method("textDocument/documentHighlight") then
             vim.api.nvim_create_autocmd("CursorHold", {
                 buffer = event.buf,
                 group = group.hl,
@@ -50,12 +50,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
             })
         end
 
-        if client:supports_method("textDocument/formatting") then
+        if not client:supports_method("textDocument/willSaveWaitUntil") and client:supports_method("textDocument/formatting") then
             vim.api.nvim_create_autocmd("BufWritePre", {
-                group = group.format,
+                group = vim.api.nvim_create_augroup("lsp-format", { clear = false }),
                 buffer = event.buf,
                 callback = function()
-                    vim.lsp.buf.format({ bufnr = event.buf, id = client.id })
+                    vim.lsp.buf.format({ bufnr = event.buf })
                 end,
             })
         end

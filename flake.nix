@@ -38,7 +38,6 @@
         (with vimPlugins; [
           nvim-lspconfig
           nvim-treesitter.withAllGrammars
-
           nvim-autopairs
         ]) ++ (with neovimPlugins; [
           evergarden
@@ -47,6 +46,7 @@
 
       optionalPlugins.${defaultCategoryName} = with pkgs.vimPlugins; [
         vimtex
+        lazydev-nvim
       ];
     };
 
