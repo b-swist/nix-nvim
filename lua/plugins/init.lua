@@ -5,6 +5,8 @@ return {
     },
     {
         "gitsigns.nvim",
-        after = require("gitsigns").setup,
+        after = function()
+            require("gitsigns").setup({})
+        end,
     },
 }
