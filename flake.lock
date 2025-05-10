@@ -30,18 +30,18 @@
         "type": "indirect"
       }
     },
-    "plugins-evergarden": {
+    "plugins-spaceduck": {
       "flake": false,
       "locked": {
-        "lastModified": 1745594024,
-        "narHash": "sha256-CiRiZRmD7tuy/fNQwYJohiS1KSL+7ihTm29cMHunUWE=",
-        "owner": "everviolet",
+        "lastModified": 1703864850,
+        "narHash": "sha256-5xkjUd84w9Wc2it1Hc9OlqmZxRk4yAaJcmaSjO9actg=",
+        "owner": "spaceduck-theme",
         "repo": "nvim",
-        "rev": "de538e9aac1358872c118e0d7bc45462fc8205c8",
+        "rev": "f476d6804114d04295ecad83979c7b3946b08010",
         "type": "github"
       },
       "original": {
-        "owner": "everviolet",
+        "owner": "spaceduck-theme",
         "repo": "nvim",
         "type": "github"
       }
@@ -50,7 +50,7 @@
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
-        "plugins-evergarden": "plugins-evergarden"
+        "plugins-spaceduck": "plugins-spaceduck"
       }
     }
   },

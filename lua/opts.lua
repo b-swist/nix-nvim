@@ -11,10 +11,11 @@ vim.opt.updatetime = 500
 vim.opt.timeoutlen = 650
 
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.list = true
 vim.opt.showmode = true
 vim.opt.signcolumn = "yes"
-vim.opt.showtabline = 2
+vim.opt.showtabline = 1
 vim.opt.virtualedit = "block"
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve-t:ver25,r-cr-o:hor20"
 
@@ -33,7 +34,7 @@ vim.opt.smarttab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true

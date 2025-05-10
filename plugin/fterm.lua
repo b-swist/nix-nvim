@@ -1,10 +1,10 @@
 local fterm = {
     win = -1,
-    buf = -1
+    buf = -1,
 }
 
 vim.api.nvim_set_hl(0, "FTerm", { link = "Normal" })
-vim.api.nvim_set_hl(0, "FTermBorder", { fg = "#83a598" })
+vim.api.nvim_set_hl(0, "FTermBorder", { link = "Normal" })
 vim.api.nvim_set_hl(0, "FTermTitle", { link = "Normal" })
 
 function fterm:create_win()
@@ -18,7 +18,7 @@ function fterm:create_win()
         row = (vim.o.lines - height) / 2,
         style = "minimal",
         border = "rounded", -- none | single | double | rounded | solid | shadow
-        title = {{ "Terminal", "FTermTitle" }},
+        title = { { "Terminal", "FTermTitle" } },
         title_pos = "center",
     })
     vim.api.nvim_set_option_value("winhl", "Normal:FTerm,FloatBorder:FTermBorder", { win = self.win })
@@ -37,10 +37,12 @@ function fterm:toggle()
         if vim.bo[self.buf].buftype ~= "terminal" then
             vim.cmd.term()
         end
-        vim.cmd("startinsert")
+        vim.cmd.startinsert()
     else
         vim.api.nvim_win_hide(self.win)
     end
 end
 
-vim.api.nvim_create_user_command("FTerm", function() fterm:toggle() end, {})
+vim.api.nvim_create_user_command("FTerm", function()
+    fterm:toggle()
+end, {})
