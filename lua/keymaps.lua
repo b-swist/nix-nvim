@@ -89,18 +89,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
--- netrw
-vim.keymap.set("n", "<leader>f", "<cmd>Lexplore<CR>", opts .. { desc = "Open filetree" })
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "netrw",
-    group = vim.api.nvim_create_augroup("netrw-keymaps", { clear = true }),
-    callback = function(event)
-        vim.keymap.set("n", "<C-l>", "<cmd>Lexplore<CR>", opts .. { buffer = event.buf })
-        vim.keymap.set("n", "i", "<nop>", opts .. { buffer = event.buf })
-        vim.opt_local.statusline = "Filetree"
-    end
-})
-
 -- fterm
 vim.keymap.set("n", "<leader>t", "<cmd>FTerm<CR>", opts .. { desc = "Toggle terminal" })
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", opts)

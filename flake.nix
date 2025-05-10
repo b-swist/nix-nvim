@@ -39,6 +39,7 @@
           nvim-lspconfig
           nvim-treesitter.withAllGrammars
           nvim-autopairs
+          oil-nvim
         ]) ++ (with neovimPlugins; [
           evergarden
         ])
