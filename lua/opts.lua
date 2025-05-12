@@ -52,5 +52,13 @@ vim.api.nvim_create_autocmd("FileType", {
     callback = function()
         vim.opt_local.tabstop = 2
         vim.opt_local.expandtab = true
-    end
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "c", "cpp" },
+    group = ft_group,
+    callback = function()
+        vim.opt_local.expandtab = false
+    end,
 })
