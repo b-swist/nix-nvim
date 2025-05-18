@@ -1,20 +1,25 @@
 return {
     {
+        "nvim-lspconfig",
+        category = "lsp.general",
+        lazy = false,
+    },
+    {
         "lua_ls",
         category = "lsp.lua",
-        lsp = true,
         ft = "lua",
+        lsp = true,
     },
     {
         "nixd",
         category = "lsp.nix",
-        lsp = true,
         ft = "nix",
+        lsp = true,
     },
     {
         "hls",
         category = "lsp.haskell",
-        lsp = true,
         ft = { "haskell", "lhaskell" },
+        lsp = true,
     },
 }

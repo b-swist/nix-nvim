@@ -80,7 +80,11 @@
           gitsigns-nvim
         ];
 
-        lsp.lua = [lazydev-nvim];
+        lsp = {
+          general = [nvim-lspconfig];
+          lua = [lazydev-nvim];
+        };
+
         format.general = [conform-nvim];
         latex = [vimtex];
 

@@ -1,7 +1,7 @@
 require("opts")
+require("lsp")
 require("plugins")
 require("keymaps")
-require("lsp")
 
 vim.cmd.colorscheme(nixCats("colorscheme"))
 
