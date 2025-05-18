@@ -1,7 +1,7 @@
 return {
     "vimtex",
     category = "latex",
-    ft = "tex",
+    lazy = false,
     before = function()
         vim.g.vimtex_view_method = "zathura"
         vim.g.vimtex_compiler_latexmk = {

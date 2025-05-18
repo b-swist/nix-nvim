@@ -57,6 +57,7 @@
         latex = [
           texliveBasic
           zathura
+          texlivePackages.latexmk
         ];
       };
 
