@@ -28,6 +28,12 @@ function fterm:create_buf()
     self.buf = vim.api.nvim_create_buf(false, true)
 end
 
+function fterm:close()
+    if vim.api.nvim_win_is_valid(self.win) then
+        vim.api.nvim_win_hide(self.win)
+    end
+end
+
 function fterm:toggle()
     if not vim.api.nvim_buf_is_valid(self.buf) then
         self:create_buf()
@@ -38,6 +44,9 @@ function fterm:toggle()
             vim.cmd.term()
         end
         vim.cmd.startinsert()
+        vim.keymap.set("n", "<Esc>", function()
+            fterm:close()
+        end, { buffer = self.buf, noremap = true, silent = true })
     else
         vim.api.nvim_win_hide(self.win)
     end
