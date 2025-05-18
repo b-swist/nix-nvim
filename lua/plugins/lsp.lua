@@ -2,7 +2,14 @@ return {
     {
         "nvim-lspconfig",
         category = "lsp.general",
-        lazy = false,
+        cmd = {
+            "LspInfo",
+            "LspLog",
+            "LspRestart",
+            "LspStart",
+            "LspStop",
+        },
+        dep_of = { "lua_ls", "nixd", "hls" },
     },
     {
         "lua_ls",
