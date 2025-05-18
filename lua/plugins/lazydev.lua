@@ -1,5 +1,6 @@
 return {
-    "lazydev",
+    "lazydev.nvim",
+    category = "lsp.lua",
     ft = "lua",
     after = function()
         require("lazydev").setup({

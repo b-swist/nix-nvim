@@ -1,6 +1,8 @@
 return {
-    "oil",
+    "oil.nvim",
+    category = "general",
     event = "DeferredUIEnter",
+    on_require = "oil",
     after = function()
         require("oil").setup({
             -- columns = {},
@@ -14,7 +16,6 @@ return {
             },
             keymaps = {
                 [".."] = { "actions.parent", mode = "n" },
-                ["<leader>f"] = { "actions.close", mode = "n" },
             },
         })
     end,

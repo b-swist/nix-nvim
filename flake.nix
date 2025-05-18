@@ -38,63 +38,57 @@
       ...
     } @ packageDef: {
       lspsAndRuntimeDeps = with pkgs; {
-        lsp = [
-          lua-language-server
-          nixd
-          haskell-language-server
-        ];
-        formatters = [
-          stylua
-          alejandra
-          # alternative nix formatter:
-          # nixfmt-rfc-style
-        ];
+        lsp = {
+          lua = [lua-language-server];
+          nix = [nixd];
+          haskell = [haskell-language-server];
+        };
+        format = {
+          lua = [stylua];
+          nix = [
+            alejandra
+            # nixfmt-rfc-style # alternative nix formatter
+          ];
+        };
         telescope = [
           ripgrep
           fd
         ];
         latex = [
           texliveBasic
+          zathura
         ];
       };
 
-      startupPlugins = with pkgs;
-        {
-          general = with vimPlugins;
-            [
-              nvim-treesitter.withAllGrammars
-              # (nvim-treesitter.withPlugins (
-              #   p: with p; [
-              #     lua
-              #     nix
-              #   ]
-              # ))
-              oil-nvim
-              nvim-autopairs
-              lz-n
-              gitsigns-nvim
-            ]
-            ++ (with neovimPlugins; [
-              spaceduck
-            ]);
-        }
-        // (with vimPlugins; {
-          lsp = [
-            nvim-lspconfig
-            lazydev-nvim
-          ];
-          formatters = [
-            conform-nvim
-          ];
-          telescope = [
-            telescope-nvim
-            telescope-fzf-native-nvim
-          ];
-          latex = [
-            vimtex
-          ];
-        });
-      # optionalPlugins = with pkgs.vimPlugins; {};
+      startupPlugins.general = with pkgs; [
+        vimPlugins.lze
+        neovimPlugins.spaceduck
+      ];
+
+      optionalPlugins = with pkgs.vimPlugins; {
+        general = [
+          nvim-treesitter.withAllGrammars
+          # or install selescted parsers:
+          # (nvim-treesitter.withPlugins (
+          #   p: with p; [
+          #     lua
+          #     nix
+          #   ]
+          # ))
+          oil-nvim
+          nvim-autopairs
+          gitsigns-nvim
+        ];
+
+        lsp.lua = [lazydev-nvim];
+        format.general = [conform-nvim];
+        latex = [vimtex];
+
+        telescope = [
+          telescope-nvim
+          telescope-fzf-native-nvim
+        ];
+      };
     };
 
     packageDefinitions.${defaultPackageName} = {
@@ -104,10 +98,16 @@
     }: {
       categories = {
         general = true;
-        lsp = true;
-        formatters = true;
+        lsp = {
+          general = true;
+          lua = true;
+          nix = true;
+          haskell = false;
+        };
+        format = true;
         telescope = true;
-        latex = false;
+        latex = true;
+        colorscheme = "spaceduck";
       };
     };
   in let

@@ -6,14 +6,7 @@ local opts = setmetatable({
     silent = true,
 }, {
     __concat = function(t1, t2)
-        local final = {}
-        for k, v in pairs(t1) do
-            final[k] = v
-        end
-        for k, v in pairs(t2) do
-            final[k] = v
-        end
-        return final
+        return vim.tbl_extend("force", t1, t2)
     end,
 })
 
@@ -57,18 +50,16 @@ vim.keymap.set({ "n", "i" }, "<M-j>", "<cmd>cnext<CR>", opts .. { desc = "Jump t
 vim.keymap.set({ "n", "i" }, "<M-k>", "<cmd>cprev<CR>", opts .. { desc = "Jump to the previous quickfix item" })
 
 -- conform
-local conform_keymap = require("lz.n").keymap("conform")
-conform_keymap.set("n", "grf", require("conform").format, opts .. { desc = "Format current buffer" })
+vim.keymap.set("n", "grf", require("conform").format, opts .. { desc = "Format current buffer" })
 
 -- telescope
-local telescope_keymap = require("lz.n").keymap("telescope")
 local builtin = require("telescope.builtin")
-telescope_keymap.set("n", "<leader>ff", builtin.find_files, opts .. { desc = "Search files" })
-telescope_keymap.set("n", "<leader>fg", builtin.live_grep, opts .. { desc = "Search live grep" })
-telescope_keymap.set("n", "<leader>fb", builtin.buffers, opts .. { desc = "Search buffers" })
-telescope_keymap.set("n", "<leader>fr", builtin.registers, opts .. { desc = "Search registers" })
-telescope_keymap.set("n", "<leader>fh", builtin.help_tags, opts .. { desc = "Search help pages" })
-telescope_keymap.set("n", "<leader>ft", builtin.builtin, opts .. { desc = "Search Telescope builtins" })
+vim.keymap.set("n", "<leader>ff", builtin.find_files, opts .. { desc = "Search files" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts .. { desc = "Search live grep" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, opts .. { desc = "Search buffers" })
+vim.keymap.set("n", "<leader>fr", builtin.registers, opts .. { desc = "Search registers" })
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts .. { desc = "Search help pages" })
+vim.keymap.set("n", "<leader>ft", builtin.builtin, opts .. { desc = "Search Telescope builtins" })
 
 -- oil
 vim.keymap.set("n", "<leader>e", require("oil").open, opts .. { desc = "Open oil buffer" })
@@ -83,45 +74,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
         local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
+        vim.keymap.set("n", "<leader>c", vim.diagnostic.setloclist, opts .. { buffer = event.buf, desc = "Open quickfix diagnostic list" })
+        vim.keymap.set("n", "<leader>fd", builtin.diagnostics, opts .. { desc = "Search diagnostics" })
         vim.keymap.set("n", "gd", function()
             vim.diagnostic.jump({ count = 1, float = true })
         end, opts .. { buffer = event.buf, desc = "Jump to the next diagnostic message" })
         vim.keymap.set("n", "gD", function()
             vim.diagnostic.jump({ count = -1, float = true })
         end, opts .. { buffer = event.buf, desc = "Jump to the previous diagnostic message" })
-        vim.keymap.set(
-            "n",
-            "<leader>c",
-            vim.diagnostic.setloclist,
-            opts .. { buffer = event.buf, desc = "Open quickfix diagnostic list" }
-        )
-        telescope_keymap.set("n", "<leader>fd", builtin.diagnostics, opts .. { desc = "Search diagnostics" })
 
         if client:supports_method("textDocument/definition") then
-            vim.keymap.set(
-                "n",
-                "grd",
-                vim.lsp.buf.definition,
-                opts .. { buffer = event.buf, desc = "Jump to definition" }
-            )
+            vim.keymap.set("n", "grd", vim.lsp.buf.definition, opts .. { buffer = event.buf, desc = "Jump to definition" })
         end
 
         if client:supports_method("textDocument/declaration") then
-            vim.keymap.set(
-                "n",
-                "grD",
-                vim.lsp.buf.declaration,
-                opts .. { buffer = event.buf, desc = "Jump to declaration" }
-            )
+            vim.keymap.set("n", "grD", vim.lsp.buf.declaration, opts .. { buffer = event.buf, desc = "Jump to declaration" })
         end
 
         if client:supports_method("textDocument/typeDefinition") then
-            vim.keymap.set(
-                "n",
-                "grt",
-                vim.lsp.buf.type_definition,
-                opts .. { buffer = event.buf, desc = "Jump to type definition" }
-            )
+            vim.keymap.set("n", "grt", vim.lsp.buf.type_definition, opts .. { buffer = event.buf, desc = "Jump to type definition" })
         end
     end,
 })

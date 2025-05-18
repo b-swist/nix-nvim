@@ -1,5 +1,8 @@
 return {
     "nvim-autopairs",
+    category = "general",
     event = "InsertEnter",
-    after = require("nvim-autopairs").setup
+    after = function()
+        require("nvim-autopairs").setup()
+    end,
 }

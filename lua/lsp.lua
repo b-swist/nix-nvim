@@ -1,4 +1,6 @@
-vim.lsp.enable({ "nixd", "hls", "lua_ls" })
+vim.lsp.config("*", {
+    root_markers = { ".git" },
+})
 
 local group = {
     attach = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -13,7 +15,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         vim.diagnostic.config({
             underline = {
-                severity = vim.diagnostic.severity.ERROR
+                severity = vim.diagnostic.severity.ERROR,
             },
             virtual_lines = {
                 current_line = true,
@@ -50,6 +52,10 @@ vim.api.nvim_create_autocmd("LspDetach", {
         vim.lsp.buf.clear_references()
         vim.api.nvim_clear_autocmds({
             group = group.hl,
+            buffer = event.buf,
+        })
+        vim.api.nvim_clear_autocmds({
+            group = group.attach,
             buffer = event.buf,
         })
     end,
