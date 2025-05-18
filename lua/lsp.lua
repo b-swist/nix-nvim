@@ -1,5 +1,17 @@
-vim.lsp.config("*", {
-    root_markers = { ".git" },
+vim.diagnostic.config({
+    underline = {
+        severity = vim.diagnostic.severity.ERROR,
+    },
+    virtual_text = {
+        spacing = 4,
+        source = "if_many",
+        prefix = "",
+    },
+    severity_sort = true,
+    signs = true,
+    float = {
+        border = "rounded",
+    },
 })
 
 local group = {
@@ -12,20 +24,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     group = group.attach,
     callback = function(event)
         local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
-
-        vim.diagnostic.config({
-            underline = {
-                severity = vim.diagnostic.severity.ERROR,
-            },
-            virtual_lines = {
-                current_line = true,
-            },
-            severity_sort = true,
-            signs = true,
-            float = {
-                border = "rounded",
-            },
-        })
 
         if client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = false })
