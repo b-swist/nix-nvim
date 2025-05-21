@@ -22,7 +22,7 @@
       inherit system;
     };
 
-    defaultPackageName = "nvim";
+    defaultPackageName = "cvim";
     luaPath = ./.;
 
     dependencyOverlays = [
@@ -102,6 +102,10 @@
       name,
       ...
     }: {
+      settings = {
+        aliases = ["nvim"];
+        wrapRc = true;
+      };
       categories = {
         general = true;
         lsp = {
