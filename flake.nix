@@ -122,9 +122,28 @@
   in {
     packages.${system} = utils.mkAllWithDefault defaultPackage;
 
-    devShells.default = pkgs.mkShell {
-      name = defaultPackageName;
-      packages = defaultPackage;
+    nixosModules.default = utils.mkNixosModules {
+      moduleNamespace = [defaultPackageName];
+      inherit
+        defaultPackageName
+        dependencyOverlays
+        luaPath
+        categoryDefinitions
+        packageDefinitions
+        nixpkgs
+        ;
+    };
+
+    homeModules.default = utils.mkHomeModules {
+      moduleNamespace = [defaultPackageName];
+      inherit
+        defaultPackageName
+        dependencyOverlays
+        luaPath
+        categoryDefinitions
+        packageDefinitions
+        nixpkgs
+        ;
     };
   };
 }
