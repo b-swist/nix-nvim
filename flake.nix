@@ -63,6 +63,7 @@
 
       startupPlugins.general = with pkgs; [
         vimPlugins.lze
+        vimPlugins.lzextras
         neovimPlugins.spaceduck
       ];
 

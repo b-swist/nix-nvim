@@ -9,24 +9,41 @@ return {
             "LspStart",
             "LspStop",
         },
-        dep_of = { "lua_ls", "nixd", "hls" },
+        lsp = function(plugin)
+            vim.lsp.config(plugin.name, plugin.lsp or {})
+            vim.lsp.enable(plugin.name)
+        end,
     },
     {
         "lua_ls",
         category = "lsp.lua",
-        ft = "lua",
-        lsp = true,
+        lsp = {
+            filetypes = "lua",
+            settings = {
+                Lua = {
+                    path = {
+                        "lua/?.lua",
+                        "lua/?/init.lua",
+                    },
+                    workspace = {
+                        checkThirdParty = false,
+                        library = {
+                            vim.env.VIMRUNTIME,
+                            nixCats.nixCatsPath,
+                        },
+                    },
+                },
+            },
+        },
     },
     {
         "nixd",
         category = "lsp.nix",
-        ft = "nix",
-        lsp = true,
+        lsp = {},
     },
     {
         "hls",
         category = "lsp.haskell",
-        ft = { "haskell", "lhaskell" },
-        lsp = true,
+        lsp = {},
     },
 }
