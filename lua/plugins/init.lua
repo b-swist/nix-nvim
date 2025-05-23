@@ -35,5 +35,6 @@ lze.load({
     { import = "plugins.lsp" },
     { import = "plugins.oil" },
     { import = "plugins.telescope" },
+    { import = "plugins.treesitter" },
     { import = "plugins.vimtex" },
 })
