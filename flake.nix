@@ -123,12 +123,13 @@
   in let
     nixCatsBuilder = utils.baseBuilder luaPath {inherit dependencyOverlays pkgs;} categoryDefinitions packageDefinitions;
     defaultPackage = nixCatsBuilder defaultPackageName;
+    moduleNamespace = ["nixCats"];
   in {
     packages.${system} = utils.mkAllWithDefault defaultPackage;
 
     nixosModules.default = utils.mkNixosModules {
-      moduleNamespace = [defaultPackageName];
       inherit
+        moduleNamespace
         defaultPackageName
         dependencyOverlays
         luaPath
@@ -139,8 +140,8 @@
     };
 
     homeModules.default = utils.mkHomeModules {
-      moduleNamespace = [defaultPackageName];
       inherit
+        moduleNamespace
         defaultPackageName
         dependencyOverlays
         luaPath
