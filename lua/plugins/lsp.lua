@@ -39,11 +39,15 @@ return {
     {
         "nixd",
         category = "lsp.nix",
-        lsp = {},
+        lsp = {
+            filetypes = "nix",
+        },
     },
     {
         "hls",
         category = "lsp.haskell",
-        lsp = {},
+        lsp = {
+            filetypes = "haskell",
+        },
     },
 }

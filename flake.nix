@@ -43,6 +43,7 @@
           nix = [nixd];
           haskell = [haskell-language-server];
         };
+
         format = {
           lua = [stylua];
           nix = [
@@ -50,13 +51,15 @@
             # nixfmt-rfc-style # alternative nix formatter
           ];
         };
+
         telescope = [
           ripgrep
           fd
         ];
+
         latex = [
-          texliveBasic
           zathura
+          texliveBasic
           texlivePackages.latexmk
         ];
       };
@@ -69,17 +72,25 @@
 
       optionalPlugins = with pkgs.vimPlugins; {
         general = [
+          oil-nvim
+          nvim-autopairs
+          gitsigns-nvim
+        ];
+
+        treesitter = [
           nvim-treesitter.withAllGrammars
-          # or install selescted parsers:
+          # or install selected parsers:
           # (nvim-treesitter.withPlugins (
           #   p: with p; [
           #     lua
           #     nix
           #   ]
           # ))
-          oil-nvim
-          nvim-autopairs
-          gitsigns-nvim
+        ];
+
+        telescope = [
+          telescope-nvim
+          telescope-fzf-native-nvim
         ];
 
         lsp = {
@@ -89,11 +100,6 @@
 
         format.general = [conform-nvim];
         latex = [vimtex];
-
-        telescope = [
-          telescope-nvim
-          telescope-fzf-native-nvim
-        ];
       };
     };
 
@@ -108,6 +114,7 @@
       };
       categories = {
         general = true;
+        treesitter = true;
         lsp = {
           general = true;
           lua = true;
