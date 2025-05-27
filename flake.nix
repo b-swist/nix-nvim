@@ -50,6 +50,7 @@
             alejandra
             # nixfmt-rfc-style # alternative nix formatter
           ];
+          latex = [tex-fmt];
         };
 
         telescope = [
