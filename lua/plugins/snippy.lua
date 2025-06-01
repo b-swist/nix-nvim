@@ -7,6 +7,12 @@ return {
         require("snippy").setup({
             -- snippet_dirs = nixCats.configDir,
             enable_auto = true,
+            expand_options = {
+                m = function()
+                    return vim.fn["vimtex#syntax#in_mathzone"]() == 1
+                end,
+            },
+
             mappings = {
                 i = {
                     ["<C-s>"] = "expand",
