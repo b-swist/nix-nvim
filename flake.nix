@@ -78,6 +78,8 @@
           gitsigns-nvim
         ];
 
+        snippets = [nvim-snippy];
+
         treesitter = [
           nvim-treesitter.withAllGrammars
           # or install selected parsers:
@@ -115,6 +117,7 @@
       };
       categories = {
         general = true;
+        snippets = true;
         treesitter = true;
         lsp = {
           general = true;

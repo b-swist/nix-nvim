@@ -33,6 +33,7 @@ vim.keymap.set("x", "<", "<gv", opts)
 vim.keymap.set("x", ">", ">gv", opts)
 
 vim.keymap.set("n", "<space>", "<nop>", opts)
+vim.keymap.set("n", "<BS>", "<nop>", opts)
 
 -- tabs
 for i = 1, 9 do

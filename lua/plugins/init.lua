@@ -34,6 +34,7 @@ lze.load({
     { import = "plugins.gitsigns" },
     { import = "plugins.lsp" },
     { import = "plugins.oil" },
+    { import = "plugins.snippy" },
     { import = "plugins.telescope" },
     { import = "plugins.treesitter" },
     { import = "plugins.vimtex" },
