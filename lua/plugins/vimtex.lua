@@ -8,7 +8,7 @@ return {
             aux_dir = "aux",
             out_dir = "out",
         }
-
+        vim.g.vimtex_syntax_nospell_comments = 1
         vim.g.vimtex_syntax_conceal = {
             accents = 1,
             ligatures = 1,
@@ -24,5 +24,6 @@ return {
             sections = 0,
             styles = 1,
         }
+        -- vim.g.vimtex_syntax_custom_cmds_with_concealed_delims = {}
     end,
 }
