@@ -2,7 +2,7 @@ return {
     "nvim-snippy",
     category = "snippets",
     event = "InsertEnter",
-    on_require = "snippy",
+    ft = { "snippet", "snippets" },
     after = function()
         require("snippy").setup({
             -- snippet_dirs = nixCats.configDir,
