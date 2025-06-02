@@ -29,14 +29,7 @@
       (utils.sanitizedPluginOverlay inputs)
     ];
 
-    categoryDefinitions = {
-      pkgs,
-      settings,
-      categories,
-      extra,
-      name,
-      ...
-    } @ packageDef: {
+    categoryDefinitions = {pkgs, ...}: {
       lspsAndRuntimeDeps = with pkgs; {
         lsp = {
           lua = [lua-language-server];
@@ -106,11 +99,7 @@
       };
     };
 
-    packageDefinitions.${defaultPackageName} = {
-      pkgs,
-      name,
-      ...
-    }: {
+    packageDefinitions.${defaultPackageName} = {...}: {
       settings = {
         aliases = ["nvim"];
         wrapRc = true;
