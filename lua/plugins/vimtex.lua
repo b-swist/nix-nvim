@@ -5,8 +5,8 @@ return {
     before = function()
         vim.g.vimtex_view_method = "zathura"
         vim.g.vimtex_compiler_latexmk = {
-            aux_dir = "aux",
-            out_dir = "out",
+            aux_dir = "../aux",
+            out_dir = "../out",
         }
         vim.g.vimtex_syntax_nospell_comments = 1
         vim.g.vimtex_syntax_conceal = {
