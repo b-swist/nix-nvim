@@ -26,4 +26,14 @@ return {
         }
         -- vim.g.vimtex_syntax_custom_cmds_with_concealed_delims = {}
     end,
+    after = function()
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "VimtexEventInitPost",
+            callback = function()
+                vim.schedule(function()
+                    vim.cmd.syntax([[match texTabularChar "\\\\" conceal cchar=↵]])
+                end)
+            end,
+        })
+    end,
 }
