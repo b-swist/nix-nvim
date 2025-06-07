@@ -6,6 +6,7 @@ vim.opt.undofile = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.scrolloff = 6
+vim.opt.exrc = true
 
 vim.opt.updatetime = 500
 vim.opt.timeoutlen = 650
