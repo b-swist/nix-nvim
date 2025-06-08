@@ -1,48 +1,49 @@
 -- opts
-vim.opt.clipboard = "unnamedplus"
-vim.opt.mouse = "a"
-vim.opt.confirm = true
-vim.opt.undofile = true
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.scrolloff = 6
-vim.opt.exrc = true
+vim.o.clipboard = "unnamedplus"
+vim.o.mouse = "a"
+vim.o.confirm = true
+vim.o.undofile = true
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.scrolloff = 6
+vim.o.exrc = true
 
-vim.opt.updatetime = 500
-vim.opt.timeoutlen = 650
+vim.o.updatetime = 500
+vim.o.timeoutlen = 650
 
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.list = true
-vim.opt.showmode = true
-vim.opt.signcolumn = "yes"
-vim.opt.showtabline = 1
-vim.opt.virtualedit = "block"
-vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve-t:ver25,r-cr-o:hor20"
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.list = true
+vim.o.listchars = "tab:> ,trail:-,nbsp:."
+vim.o.showmode = true
+vim.o.signcolumn = "yes"
+vim.o.showtabline = 1
+vim.o.virtualedit = "block"
+vim.o.guicursor = "n-v-c-sm:block,i-ci-ve-t:ver25,r-cr-o:hor20"
 
-vim.opt.wrap = true
-vim.opt.linebreak = true
-vim.opt.breakindent = true
--- vim.opt.showbreak = "> "
-vim.opt.smoothscroll = true
+vim.o.wrap = true
+vim.o.linebreak = true
+vim.o.breakindent = true
+-- vim.o.showbreak = "> "
+vim.o.smoothscroll = true
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 0
-vim.opt.softtabstop = -1
-vim.opt.expandtab = true
-vim.opt.smarttab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 0
+vim.o.softtabstop = -1
+vim.o.expandtab = true
+vim.o.smarttab = true
 
-vim.opt.autoindent = true
-vim.opt.smartindent = true
+vim.o.autoindent = true
+vim.o.smartindent = true
 
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.inccommand = "split"
+vim.o.hlsearch = true
+vim.o.incsearch = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.inccommand = "split"
 
-vim.opt.background = "dark"
-vim.opt.termguicolors = true
+vim.o.background = "dark"
+vim.o.termguicolors = true
 
 -- filetype opts
 local ft_group = vim.api.nvim_create_augroup("filetype-opts", { clear = true })
