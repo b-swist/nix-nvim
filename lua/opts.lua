@@ -1,4 +1,3 @@
--- opts
 vim.o.clipboard = "unnamedplus"
 vim.o.mouse = "a"
 vim.o.confirm = true
@@ -44,35 +43,3 @@ vim.o.inccommand = "split"
 
 vim.o.background = "dark"
 vim.o.termguicolors = true
-
--- filetype opts
-local ft_group = vim.api.nvim_create_augroup("filetype-opts", { clear = true })
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "nix", "html", "css" },
-    group = ft_group,
-    callback = function()
-        vim.opt_local.tabstop = 2
-        vim.opt_local.expandtab = true
-    end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "tex",
-    group = ft_group,
-    callback = function()
-        vim.opt_local.tabstop = 2
-        vim.opt_local.expandtab = true
-        vim.opt_local.smartindent = true
-        vim.opt_local.conceallevel = 2
-        vim.g.tex_conceal = "abdmg"
-    end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp" },
-    group = ft_group,
-    callback = function()
-        vim.opt_local.expandtab = false
-    end,
-})
