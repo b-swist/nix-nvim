@@ -13,6 +13,8 @@ local opts = setmetatable({
 vim.keymap.set("n", "<leader>r", "<cmd>luafile %<CR>", opts .. { desc = "Source current file" })
 vim.keymap.set("x", "<leader>r", ":lua<CR>", opts .. { desc = "Source current selection" })
 
+vim.keymap.set("n", "x", '"_x', opts)
+
 -- motions
 vim.keymap.set({ "n", "x" }, "j", function()
     return vim.v.count == 0 and "gj" or "j"
@@ -50,21 +52,6 @@ vim.keymap.set("n", "<leader>db", "<cmd>bdel<CR>", opts .. { desc = "Delete curr
 vim.keymap.set({ "n", "i" }, "<M-j>", "<cmd>cnext<CR>", opts .. { desc = "Jump to the next quickfix item" })
 vim.keymap.set({ "n", "i" }, "<M-k>", "<cmd>cprev<CR>", opts .. { desc = "Jump to the previous quickfix item" })
 
--- conform
-vim.keymap.set("n", "grf", require("conform").format, opts .. { desc = "Format current buffer" })
-
--- telescope
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, opts .. { desc = "Search files" })
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts .. { desc = "Search live grep" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, opts .. { desc = "Search buffers" })
-vim.keymap.set("n", "<leader>fr", builtin.registers, opts .. { desc = "Search registers" })
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts .. { desc = "Search help pages" })
-vim.keymap.set("n", "<leader>ft", builtin.builtin, opts .. { desc = "Search Telescope builtins" })
-
--- oil
-vim.keymap.set("n", "<leader>e", require("oil").open, opts .. { desc = "Open oil buffer" })
-
 -- fterm
 vim.keymap.set("n", "<leader>t", "<cmd>FTerm<CR>", opts .. { desc = "Toggle terminal" })
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", opts)
@@ -76,7 +63,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
 
         vim.keymap.set("n", "<leader>c", vim.diagnostic.setloclist, opts .. { buffer = event.buf, desc = "Open quickfix diagnostic list" })
-        vim.keymap.set("n", "<leader>fd", builtin.diagnostics, opts .. { desc = "Search diagnostics" })
         vim.keymap.set("n", "gd", function()
             vim.diagnostic.jump({ count = 1, float = true })
         end, opts .. { buffer = event.buf, desc = "Jump to the next diagnostic message" })

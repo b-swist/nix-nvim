@@ -7,9 +7,9 @@ return {
     category = "format.general",
     event = "BufWritePre",
     cmd = "ConformInfo",
-    on_require = "conform",
     after = function()
-        require("conform").setup({
+        local conform = require("conform")
+        conform.setup({
             formatters_by_ft = {
                 lua = set_formatter("lua", { "stylua" }),
                 nix = set_formatter("nix", { "alejandra" }),
@@ -19,5 +19,7 @@ return {
                 lsp_format = "fallback",
             },
         })
+
+        vim.keymap.set("n", "grf", conform.format)
     end,
 }

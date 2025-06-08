@@ -4,7 +4,8 @@ return {
     event = "DeferredUIEnter",
     on_require = "oil",
     after = function()
-        require("oil").setup({
+        local oil = require("oil")
+        oil.setup({
             -- columns = {},
             skip_confirm_for_simple_edits = true,
             view_options = {
@@ -18,5 +19,7 @@ return {
                 [".."] = { "actions.parent", mode = "n" },
             },
         })
+
+        vim.keymap.set("n", "<leader>e", oil.open)
     end,
 }
