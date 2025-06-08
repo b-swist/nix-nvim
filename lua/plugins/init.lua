@@ -20,10 +20,7 @@ lze.register_handlers({
             end
         end
 
-        local enabled = plugin.enabled
-        if enabled == true then
-            enabled = result
-        end
+        plugin.enabled = result
         return plugin
     end,
 })
