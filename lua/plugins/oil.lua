@@ -17,6 +17,7 @@ return {
             },
             keymaps = {
                 [".."] = { "actions.parent", mode = "n" },
+                ["<leader>e"] = { "actions.close", mode = "n" },
             },
         })
 

@@ -1,7 +1,7 @@
 return {
     "telescope.nvim",
     category = "telescope",
-    cmd = "Telescope",
+    event = "DeferredUIEnter",
     load = function(name)
         vim.cmd.packadd(name)
         vim.cmd.packadd("telescope-fzf-native.nvim")

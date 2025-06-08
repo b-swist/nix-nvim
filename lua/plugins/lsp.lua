@@ -4,10 +4,7 @@ return {
         category = "lsp.general",
         cmd = {
             "LspInfo",
-            "LspLog",
-            "LspRestart",
             "LspStart",
-            "LspStop",
         },
         lsp = function(plugin)
             vim.lsp.config(plugin.name, plugin.lsp or {})
