@@ -40,7 +40,6 @@ end
 function fterm:toggle()
     if not vim.api.nvim_buf_is_valid(self.buf) then
         self:create_buf()
-        vim.bo[self.buf].buflisted = false
     end
     if not vim.api.nvim_win_is_valid(self.win) then
         self:create_win()
@@ -49,6 +48,7 @@ function fterm:toggle()
         end
         vim.cmd.startinsert()
         vim.api.nvim_set_option_value("buflisted", false, { buf = self.buf })
+
         vim.keymap.set("n", "<Esc>", function()
             fterm:close()
         end, { buffer = self.buf, noremap = true, silent = true })
