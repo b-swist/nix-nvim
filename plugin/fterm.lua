@@ -8,14 +8,17 @@ vim.api.nvim_set_hl(0, "FTermBorder", { link = "Normal" })
 vim.api.nvim_set_hl(0, "FTermTitle", { link = "Normal" })
 
 function fterm:create_win()
-    local width = math.floor(vim.o.columns * 0.6)
-    local height = math.floor(vim.o.lines * 0.6)
+    local columns = vim.api.nvim_get_option_value("columns", { scope = "global" })
+    local lines = vim.api.nvim_get_option_value("lines", { scope = "global" })
+
+    local width = math.floor(columns * 0.6)
+    local height = math.floor(lines * 0.6)
     self.win = vim.api.nvim_open_win(self.buf, true, {
         relative = "editor",
         width = width,
         height = height,
-        col = (vim.o.columns - width) / 2,
-        row = (vim.o.lines - height) / 2,
+        col = (columns - width) / 2,
+        row = (lines - height) / 2,
         style = "minimal",
         border = "rounded", -- none | single | double | rounded | solid | shadow
         title = { { "Terminal", "FTermTitle" } },
@@ -37,13 +40,15 @@ end
 function fterm:toggle()
     if not vim.api.nvim_buf_is_valid(self.buf) then
         self:create_buf()
+        vim.bo[self.buf].buflisted = false
     end
     if not vim.api.nvim_win_is_valid(self.win) then
         self:create_win()
-        if vim.bo[self.buf].buftype ~= "terminal" then
+        if vim.api.nvim_get_option_value("buftype", { buf = self.buf }) ~= "terminal" then
             vim.cmd.term()
         end
         vim.cmd.startinsert()
+        vim.api.nvim_set_option_value("buflisted", false, { buf = self.buf })
         vim.keymap.set("n", "<Esc>", function()
             fterm:close()
         end, { buffer = self.buf, noremap = true, silent = true })
