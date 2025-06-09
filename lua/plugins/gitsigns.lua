@@ -1,6 +1,7 @@
 return {
     "gitsigns.nvim",
     category = "general",
+    event = "DeferredUIEnter",
     after = function()
         require("gitsigns").setup({
             signs = {

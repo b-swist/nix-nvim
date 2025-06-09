@@ -18,11 +18,10 @@ return {
             end
         end, { bang = true })
 
-        ---@diagnostic disable: missing-parameter
         vim.api.nvim_create_user_command("ConformEnable", function()
             vim.b.disable_autoformat = false
             vim.g.disable_autoformat = false
-        end)
+        end, {})
 
         conform.setup({
             stop_after_first = true,
