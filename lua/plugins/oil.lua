@@ -1,12 +1,12 @@
 return {
     "oil.nvim",
     category = "general",
+    lazy = vim.fn.argc(-1) == 0,
     event = "DeferredUIEnter",
-    on_require = "oil",
     after = function()
         local oil = require("oil")
         oil.setup({
-            -- columns = {},
+            default_file_explorer = true,
             skip_confirm_for_simple_edits = true,
             view_options = {
                 show_hidden = true,
