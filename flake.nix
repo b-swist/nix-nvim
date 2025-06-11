@@ -34,7 +34,10 @@
         lsp = {
           lua = [lua-language-server];
           nix = [nixd];
-          haskell = [haskell-language-server];
+          haskell = [
+            haskell-language-server
+            ghc
+          ];
         };
 
         format = {
@@ -112,7 +115,7 @@
           general = true;
           lua = true;
           nix = true;
-          haskell = false;
+          haskell = true;
         };
         format = true;
         telescope = true;
