@@ -19,6 +19,7 @@ vim.o.signcolumn = "yes"
 vim.o.showtabline = 1
 vim.o.virtualedit = "block"
 vim.o.guicursor = "n-v-c-sm:block,i-ci-ve-t:ver25,r-cr-o:hor20"
+vim.o.completeopt = "menuone,popup,noinsert"
 
 vim.o.wrap = true
 vim.o.linebreak = true
